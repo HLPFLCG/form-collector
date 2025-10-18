@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HLPFL - Coming Soon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 120px;
+      height: auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      color: #1f2937;
+      margin-bottom: 10px;
+    }
+
+    .header .subtitle {
+      font-size: 16px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    .required {
+      color: #ef4444;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: scale(0.98);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Message Styles */
+    .form-message {
+      padding: 20px;
+      margin-bottom: 24px;
+      border-radius: 12px;
+      text-align: center;
+      display: none;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+
+    .form-message.show {
+      display: block;
+    }
+
+    .form-message.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .form-message.success-message {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      color: #065f46;
+      border: 2px solid #10b981;
+      box-shadow: 0 4px 6px rgba(16, 185, 129, 0.1);
+    }
+
+    .form-message.error-message {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      color: #991b1b;
+      border: 2px solid #ef4444;
+      box-shadow: 0 4px 6px rgba(239, 68, 68, 0.1);
+    }
+
+    .message-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .message-icon {
+      font-size: 24px;
+    }
+
+    .message-text {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .privacy-notice {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 20px;
+    }
+
+    .privacy-notice a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    .privacy-notice a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+
+      .header .subtitle {
+        font-size: 14px;
+      }
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://hlpfl.org/images/updatedimages/loadinglogo.svg" alt="HLPFL Logo">
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+      <h1>🎵 Coming Soon</h1>
+      <p class="subtitle">
+        We're working hard to bring you something amazing. This page is currently under construction,
+        but we'd love to connect with you in the meantime!
+      </p>
+    </div>
+
+    <!-- Success/Error Message -->
+    <div id="formMessage" class="form-message">
+      <div class="message-content">
+        <span class="message-icon"></span>
+        <p class="message-text"></p>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="comingSoonForm">
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">
+          First Name <span class="required">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="firstName" 
+          name="firstName" 
+          required
+          placeholder="Enter your first name"
+        >
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-group">
+        <label for="lastName">
+          Last Name <span class="required">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="lastName" 
+          name="lastName" 
+          required
+          placeholder="Enter your last name"
+        >
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">
+          Email Address <span class="required">*</span>
+        </label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required
+          placeholder="your@email.com"
+        >
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          placeholder="(123) 456-7890"
+        >
+      </div>
+
+      <!-- Interest -->
+      <div class="form-group">
+        <label for="interest">What are you interested in?</label>
+        <select id="interest" name="interest">
+          <option value="">Select an option</option>
+          <option value="Music Foundation">Music Foundation</option>
+          <option value="Artist Branding">Artist Branding</option>
+          <option value="Music Rights & Royalties">Music Rights & Royalties</option>
+          <option value="Career Growth">Career Growth</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Message -->
+      <div class="form-group">
+        <label for="message">Message (Optional)</label>
+        <textarea 
+          id="message" 
+          name="message" 
+          placeholder="Tell us more about your interests..."
+        ></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span id="btnText">Get Early Access</span>
+      </button>
+    </form>
+
+    <!-- Privacy Notice -->
+    <p class="privacy-notice">
+      By submitting this form, you agree to our <a href="/privacy-policy">Privacy Policy</a>.
+      We'll never share your information.
+    </p>
+  </div>
+
+  <script>
+    // IMPORTANT: Replace with your actual form collector URL and API key
+    const FORM_COLLECTOR_URL = 'https://forms.yourdomain.com/api/submit/YOUR_API_KEY';
+
+    document.getElementById('comingSoonForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(e.target);
+      const data = {
+        first_name: formData.get('firstName'),
+        last_name: formData.get('lastName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        interest: formData.get('interest'),
+        message: formData.get('message'),
+        // Add metadata
+        submitted_at: new Date().toISOString(),
+        page: 'under-construction',
+        source: 'hlpfl.org'
+      };
+      
+      // Get submit button
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const originalText = btnText.textContent;
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      btnText.innerHTML = '<span class="spinner"></span> Submitting...';
+      
+      try {
+        const response = await fetch(FORM_COLLECTOR_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          // Success
+          showMessage('success', '🎉', result.message || 'Thank you! We\'ll notify you when we launch.');
+          e.target.reset();
+          
+          // Optional: Track with Google Analytics
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_submission', {
+              'event_category': 'engagement',
+              'event_label': 'coming_soon_form'
+            });
+          }
+          
+          // Optional: Track with Facebook Pixel
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead', {
+              content_name: 'Coming Soon Signup',
+              content_category: 'Early Access'
+            });
+          }
+        } else {
+          // Error
+          showMessage('error', '❌', result.error || 'Something went wrong. Please try again.');
+        }
+      } catch (error) {
+        console.error('Submission error:', error);
+        showMessage('error', '⚠️', 'Network error. Please check your connection and try again.');
+      } finally {
+        // Reset button
+        submitBtn.disabled = false;
+        btnText.textContent = originalText;
+      }
+    });
+
+    function showMessage(type, icon, message) {
+      const messageDiv = document.getElementById('formMessage');
+      const iconSpan = messageDiv.querySelector('.message-icon');
+      const textP = messageDiv.querySelector('.message-text');
+      
+      iconSpan.textContent = icon;
+      textP.textContent = message;
+      messageDiv.className = `form-message ${type}-message show`;
+      
+      // Animate in
+      setTimeout(() => {
+        messageDiv.classList.add('animate-in');
+      }, 10);
+      
+      // Scroll to message
+      messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        messageDiv.classList.remove('animate-in');
+        setTimeout(() => {
+          messageDiv.classList.remove('show');
+        }, 300);
+      }, 5000);
+    }
+
+    // Optional: Add form field validation
+    document.getElementById('email').addEventListener('blur', function() {
+      const email = this.value;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      if (email && !emailRegex.test(email)) {
+        this.style.borderColor = '#ef4444';
+      } else {
+        this.style.borderColor = '#e5e7eb';
+      }
+    });
+
+    // Optional: Format phone number
+    document.getElementById('phone').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 0) {
+        if (value.length <= 3) {
+          value = `(${value}`;
+        } else if (value.length <= 6) {
+          value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+        } else {
+          value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+        }
+      }
+      e.target.value = value;
+    });
+  </script>
+</body>
+</html>
