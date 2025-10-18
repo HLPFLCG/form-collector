@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Collector - Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/admin.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Login Page -->
+  <div id="loginPage" class="login-container">
+    <div class="login-box">
+      <h1>🚀 Form Collector</h1>
+      <div id="loginError" class="alert alert-error hidden"></div>
+      <form onsubmit="login(event)">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard Page -->
+  <div id="dashboardPage" class="dashboard hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>🚀 Form Collector</h2>
+        <p id="userEmail"></p>
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a class="nav-link active" onclick="navigateTo('dashboard')">
+              <span>📊</span> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="navigateTo('forms')">
+              <span>📝</span> Forms
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="logout()">
+              <span>🚪</span> Logout
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+      <!-- Dynamic content loaded here -->
+    </main>
+  </div>
+
+  <!-- Create/Edit Form Modal -->
+  <div id="formModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="formModalTitle">Create New Form</h2>
+        <button class="modal-close" onclick="closeFormModal()">&times;</button>
+      </div>
+      <form onsubmit="saveForm(event)">
+        <div class="modal-body">
+          <input type="hidden" id="formId">
+          <div class="form-group">
+            <label for="formName">Form Name *</label>
+            <input type="text" id="formName" required>
+          </div>
+          <div class="form-group">
+            <label for="formEmail">Notification Email *</label>
+            <input type="email" id="formEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="formRedirectUrl">Redirect URL (optional)</label>
+            <input type="url" id="formRedirectUrl" placeholder="https://example.com/thank-you">
+            <small style="color: var(--text-light); font-size: 12px;">
+              Leave empty to show default success page
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="formSuccessMessage">Success Message</label>
+            <textarea id="formSuccessMessage" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeFormModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Form</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Form Details Modal -->
+  <div id="detailsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Form Details & Integration</h2>
+        <button class="modal-close" onclick="closeDetailsModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="detailsContent">
+        <!-- Dynamic content loaded here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeDetailsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submission Details Modal -->
+  <div id="submissionModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Submission Details</h2>
+        <button class="modal-close" onclick="closeSubmissionModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="submissionDetails">
+        <!-- Dynamic content loaded here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeSubmissionModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+  <script>
+    // Set user email in sidebar
+    const userEmail = localStorage.getItem('userEmail');
+    if (userEmail) {
+      document.getElementById('userEmail').textContent = userEmail;
+    }
+  </script>
+</body>
+</html>
