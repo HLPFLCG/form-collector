@@ -107,6 +107,8 @@ fetch('http://localhost:3000/api/submit/YOUR_API_KEY', {
 
 - **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Detailed step-by-step setup instructions
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment guide
+- **[CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md)** - Complete Cloudflare setup with custom domain
+- **[QUICK_CLOUDFLARE_GUIDE.md](QUICK_CLOUDFLARE_GUIDE.md)** - Quick 30-minute Cloudflare setup
 - **[API_DOCUMENTATION.md](API_DOCUMENTATION.md)** - Complete API reference
 - **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** - Comprehensive project overview
 
@@ -139,6 +141,11 @@ Connect GitHub repository and auto-deploy
 ```bash
 docker-compose up -d
 ```
+
+### 🌐 Custom Domain with Cloudflare
+Want to use your own domain? See our Cloudflare guides:
+- **[Quick Setup (30 min)](QUICK_CLOUDFLARE_GUIDE.md)** - Fast track to production
+- **[Complete Guide](CLOUDFLARE_SETUP.md)** - Detailed setup with all options
 
 ## 🔒 Security Features
 
